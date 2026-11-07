@@ -1,0 +1,29 @@
+metric,value,unit
+download_direct_50MB,4915066,10.172803,B/s,s
+download_tunnel_50MB,4744935,10.537551,B/s,s
+parallel_4x10MB,agg=4743270B/s wall=8.433s streams=4,B/s
+parallel_8x5MB,agg=4211856B/s wall=9.497s streams=8,B/s
+ping_under_load,147,ms
+ping_under_load,149,ms
+ping_under_load,132,ms
+ping_under_load,138,ms
+ping_under_load,135,ms
+ping_under_load,132,ms
+ping_under_load,152,ms
+ping_under_load,123,ms
+ping_under_load,125,ms
+ping_under_load,129,ms
+ping_under_load,147,ms
+ping_under_load,141,ms
+ttfb_tunnel_under_load,0.765710,s
+ttfb_tunnel_under_load,0.763334,s
+ttfb_tunnel_under_load,0.764821,s
+ttfb_tunnel_under_load,0.628475,s
+ttfb_tunnel_under_load,0.709871,s
+ttfb_tunnel_under_load,0.697946,s
+upload_direct_10MB,3039207,3.290331,B/s,s
+upload_tunnel_10MB,1104740,9.051903,B/s,s
+bigfile_one_conn_tunnel,536870912,85.493356,6279679,bytes,seconds,B/s
+concurrency_50,ok=50/50 wall=1.65s mean_ttfb=1.062s max_ttfb=1.323s,sessions
+concurrency_100,ok=100/100 wall=3.05s mean_ttfb=1.915s max_ttfb=2.486s,sessions
+concurrency_200,ok=200/200 wall=6.43s mean_ttfb=4.276s max_ttfb=5.637s,sessions
