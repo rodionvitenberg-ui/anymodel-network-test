@@ -1,0 +1,4 @@
+[submodule "Xray-core"]
+	path = Xray-core
+	url = https://github.com/XTLS/Xray-core
+	branch = main
