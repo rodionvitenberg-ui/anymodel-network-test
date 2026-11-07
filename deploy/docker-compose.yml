@@ -1,0 +1,26 @@
+services:
+  xray:
+    # Пин версии — осознанно НЕ последняя: REALITY-аутентификация в 26.9+ требует
+    # пост-квантового key share X25519MLKEM768, а 26.7.x ввёл по умолчанию
+    # minClientVer = v26.3.27. И то и другое отсекает REALITY-клиентов на sing-box
+    # (ядро Hiddify): 26.6.27 — последний релиз, который принимает и sing-box, и
+    # xray-клиентов. Причины и замеры: docs/adr/0001-server-pinned-26.6.27.md
+    image: ghcr.io/xtls/xray-core:${XRAY_VERSION:-26.6.27}
+    container_name: xray-reality
+    restart: unless-stopped
+    # root внутри контейнера — только чтобы занять привилегированный порт 443:
+    # образ штатно идёт под uid 65532, а в Docker не-root-процессу нельзя
+    # биндить порты <1024 даже с cap_add NET_BIND_SERVICE (проверено на 26.6.27).
+    # Непривилегированный inbound = нестандартный порт (8443) + предупреждение Xray.
+    user: "0:0"
+    # host-сеть: минимум накладных расходов NAT (важно для throughput-бенчмарка),
+    # клиентские IP видны в логах напрямую
+    network_mode: host
+    volumes:
+      - ./config/config.json:/usr/local/etc/xray/config.json:ro
+    command: ["run", "-c", "/usr/local/etc/xray/config.json"]
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "3"

@@ -1,0 +1,72 @@
+{
+  "log": {
+    "loglevel": "warning"
+  },
+  "inbounds": [
+    {
+      "listen": "0.0.0.0",
+      "port": __XRAY_PORT__,
+      "protocol": "vless",
+      "settings": {
+        "clients": [
+          {
+            "id": "__XRAY_UUID__",
+            "flow": "xtls-rprx-vision",
+            "email": "user1"
+          }
+        ],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "tcp",
+        "security": "reality",
+        "realitySettings": {
+          "show": false,
+          "dest": "__XRAY_DEST__:443",
+          "xver": 0,
+          "serverNames": ["__XRAY_DEST__"],
+          "privateKey": "__XRAY_REALITY_PRIVATE__",
+          "shortIds": ["__XRAY_SHORT_ID__"],
+          "maxTimeDiff": 0,
+          "maxIdleTime": 0
+        }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": ["http", "tls", "quic"],
+        "routeOnly": false
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "tag": "direct"
+    },
+    {
+      "protocol": "blackhole",
+      "tag": "block"
+    }
+  ],
+  "routing": {
+    "domainStrategy": "AsIs",
+    "rules": [
+      {
+        "type": "field",
+        "ip": [
+          "0.0.0.0/8",
+          "10.0.0.0/8",
+          "100.64.0.0/10",
+          "127.0.0.0/8",
+          "169.254.0.0/16",
+          "172.16.0.0/12",
+          "192.168.0.0/16",
+          "::1/128",
+          "fc00::/7",
+          "fe80::/10"
+        ],
+        "outboundTag": "block"
+      }
+    ]
+  }
+}
